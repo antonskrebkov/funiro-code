@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+@@include('html/head.html',{
+"title":"Inspirations"
+})
+
+<body>
+  <div class="wrapper">
+    @@include('html/header.html',{})
+    <main class="page" style="padding-top: 300px">
+      <section class="page__products products">
+        <div class="products__container">
+          <h2 class="products__title">Our Products</h2>
+          <div class="products__items">
+          </div>
+          <div class="products__footer">
+            <a href="" class="products__more">Show More</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    @@include('html/footer.html',{})
+  </div>
+
+  <div class="share-popup">
+    <div class="share-popup__text">Copied to clipboard!</div>
+  </div>
+  <script src="js/app.min.js"></script>
+</body>
+
+</html>

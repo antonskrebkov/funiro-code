@@ -1,0 +1,242 @@
+.footer {
+  background-color: #fff;
+  padding-bottom: 50px;
+
+  @media (max-width: $tablet) {
+    padding-bottom: 30px;
+  }
+
+  &__container {}
+
+  &__body {
+    display: flex;
+    justify-content: space-between;
+    @include adaptiveValue('gap', 80, 20, 1240, 1000);
+    border-top: 1px solid#D8D8D8;
+    padding-top: 80px;
+
+    @media (max-width: $tablet) {
+      @include adaptiveValue('gap', 30, 30, 992, 320);
+      padding-top: 30px;
+      flex-direction: column;
+    }
+  }
+
+  &__main {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    @media (max-width: $tablet) {
+      width: auto;
+    }
+  }
+
+  &__logo {
+    font-size: 24px;
+    line-height: math.div(29, 24);
+    font-weight: 700;
+    color: #000;
+  }
+
+  &__text {
+    font-size: 16px;
+    line-height: math.div(24, 16);
+    font-weight: 400;
+    color: $grayColor;
+  }
+
+  &__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    a {
+      font-size: 16px;
+      line-height: math.div(24, 16);
+      font-weight: 400;
+      color: $grayColor;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__menu {}
+
+  &__subscribe {}
+}
+
+.contacts-footer {
+  &__item {}
+
+  &__location {
+    padding-left: 28px;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 0;
+      left: 0;
+      background: url('../img/icons/location.svg');
+    }
+
+  }
+
+  &__phone {
+    position: relative;
+    padding-left: 28px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 0;
+      left: 0;
+      background: url('../img/icons/phone.svg');
+    }
+  }
+
+  &__link {}
+}
+
+.menu-footer {
+  display: flex;
+  @include adaptiveValue('gap', 80, 20, 1240, 1000);
+
+  @media (max-width: $tablet) {
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: $mobileSmall) {
+    flex-direction: column;
+  }
+
+
+  &__column {}
+
+  &__button {
+    font-size: 24px;
+    line-height: math.div(29, 24);
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 15px;
+    white-space: nowrap;
+    pointer-events: none;
+
+    @media (max-width: $mobileSmall) {
+      position: relative;
+      width: 100%;
+      text-align: left;
+      pointer-events: all;
+
+      &::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 14px;
+        height: 9px;
+        background: url('../img/icons/arrow-down.svg') center center;
+        transition: all 0.3s;
+      }
+
+      &.active::after {
+        top: 35%;
+        transform: rotate(180deg);
+      }
+    }
+
+  }
+
+  &__list {
+    @media (max-width: $mobileSmall) {
+      display: none;
+    }
+
+    li+li {
+      margin-top: 15px;
+    }
+  }
+
+  &__link {
+    font-size: 16px;
+    line-height: math.div(24, 16);
+    font-weight: 500;
+    color: $grayColor;
+    white-space: nowrap;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.subscribe {
+  &__title {
+    font-size: 24px;
+    line-height: math.div(29, 24);
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 15px;
+    cursor: default;
+  }
+
+  &__form {
+    display: flex;
+    height: 45px;
+    @include adaptiveValue('width', 292, 222, 1240, 992);
+
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
+  }
+
+  &__input {
+    outline: none;
+    padding: 12px 10px;
+    @include adaptiveValue('width', 242, 170, 1240, 992);
+    height: 45px;
+    font-size: 16px;
+    line-height: math.div(24, 16);
+    font-weight: 400;
+    color: $mainColor;
+    margin-right: 5px;
+    box-sizing: border-box;
+    background-color: #F4F5F7;
+    cursor: text;
+
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
+
+    &:focus {
+
+      &::placeholder {
+        font-size: 0;
+      }
+    }
+
+    &::placeholder {
+      color: #828282;
+    }
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 45px;
+    height: 45px;
+    background-color: $accentColor;
+  }
+}

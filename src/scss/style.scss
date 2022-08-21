@@ -1,0 +1,169 @@
+@use "sass:math";
+
+// Импорт миксинов
+@import "mixins";
+@import "swiper";
+
+//<FONTS>======================================================================
+
+// Подключаем шрифты ===========================================================
+//&display=swap - добавить при подключении через гуглфонтс (F1 + добавить шрифты)
+// @import url("");
+@import "fonts"; // - подключить при локальных файлах шрифтов
+// /Подключаем шрифты ==========================================================
+
+// Иконочные шрифты ============================================================
+//@import "icons";
+// /Иконочные шрифты ===========================================================
+
+// Шрифт по умолчанию ==========================================================
+$fontFamily: "Gilroy";
+$fontSize: rem(16); // 18px размер шрифта по умолчанию из макета
+// /Шрифт по умолчанию =========================================================
+
+//</FONTS>=====================================================================
+
+//<SETTINGS>==================================================================
+// Основные цвета
+$mainColor: #3A3A3A;
+$secColor: #898989;
+$grayColor: #616161;
+$accentColor: #E89F71;
+
+// Минимальная ширина страницы
+$minWidth: 320;
+// Ширина полотна (Макета)
+$maxWidth: 1440;
+// Ширина ограничевающего контейнера (0 - нет ограничения)
+$maxWidthContainer: 1270;
+// Общий отступ у контейнера
+// (30 = по 15 слева и справа, 0 - нет отступа)
+$containerPadding: 30;
+
+// Тип адаптива:
+// 1 - отзывчивость (у контейнера нет брейкпоинтов)
+// 2 - по брейк-поинтам (контейнер меняет свою ширину по брейкпоинтам)
+$responsiveType: 1;
+
+// Ширина срабатывания первого брейкпоинта
+$containerWidth: $maxWidthContainer + $containerPadding;
+
+//Брейкпоинты
+$pc: em($containerWidth); // PC, laptop, some tablets in horizontal position
+$tablet: em(991.98); // Tablets, some phones in horizontal position
+$mobile: em(767.98); // Phones L
+$mobileSmall: em(479.98); // Phones S
+
+// Обнуление, общие параметры ==================================================
+@import "null";
+
+body {
+  height: 100%;
+  color: $mainColor;
+  font-size: $fontSize;
+  font-weight: 500;
+  font-family: $fontFamily;
+
+
+  // Скролл заблокирован
+  .lock & {
+    overflow: hidden;
+    touch-action: none;
+  }
+}
+
+// Оболочка ====================================================================
+.wrapper {
+  // width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  // Сайт загружен
+  .loaded & {}
+
+  // Прижимаем footer
+  >main {
+    flex: 1 1 auto;
+  }
+
+  // Фикс для слайдеров
+  >* {
+    min-width: 0;
+  }
+}
+
+// Ограничивающий контейнер =====================================================
+
+/*
+Стили будут применяться ко всем классам содержащим *__container
+Например header__container, main__container и тд
+Снипет (HTML): cnt
+*/
+
+@if ($responsiveType==1) {
+
+  // Отзывчивая
+  [class*="__container"] {
+    @if ($maxWidthContainer>0) {
+      max-width: rem($maxWidthContainer);
+      box-sizing: border-box;
+      margin: 0 auto;
+    }
+
+    @if ($containerPadding>0) {
+      padding: 0 rem(math.div($containerPadding, 2));
+    }
+  }
+}
+
+@else {
+
+  // По брейкпоинтам
+  [class*="__container"] {
+    margin: 0 auto;
+
+    @if ($maxWidthContainer>0) {
+      max-width: rem($maxWidthContainer);
+      box-sizing: border-box;
+    }
+
+    @else {
+      @if ($containerPadding>0) {
+        padding: 0 rem(math.div($containerPadding, 2));
+      }
+    }
+
+    @media (max-width: $pc) {
+      max-width: rem(970);
+    }
+
+    @media (max-width: $tablet) {
+      max-width: rem(750);
+    }
+
+    @media (max-width: $mobile) {
+      max-width: none;
+
+      @if ($containerPadding>0 and $maxWidthContainer>0) {
+        padding: 0 rem(math.div($containerPadding, 2));
+      }
+    }
+  }
+}
+
+//</SETTINGS>=================================================================
+
+// Подключение базовых стилей, шаблонов (заготовок) и вспомагательных классов
+@import "fancybox";
+
+// Подключение стилей общих элементов проекта
+// @import "common";
+
+// Подключение стилей отдельных блоков
+@import "header";
+@import "footer";
+
+// Подключение стилей отдельных страниц
+@import "home";
